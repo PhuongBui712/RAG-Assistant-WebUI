@@ -1,14 +1,12 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { RemoteRunnable } from '@langchain/core/runnables/remote';
 import { MessageList } from './MessageList';
 import { ChatInput } from './ChatInput';
 
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-const remoteChain = new RemoteRunnable({ url: 'http://localhost:8000/hcmus-ai-assistant/'})
+const hcmus_rag_api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/hcmus-ai-assistant/'
+const remoteChain = new RemoteRunnable({ url: hcmus_rag_api })
 
 interface Message {
   role: 'user' | 'ai';
