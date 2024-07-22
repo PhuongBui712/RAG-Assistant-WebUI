@@ -53,7 +53,7 @@ const ChatInterface: React.FC = () => {
       for await (const chunk of result) {
         console.log(chunk)
         await new Promise(resolve => setTimeout(resolve, GENERATION_DELAY));
-        const chunkText = chunk;
+        const chunkText = chunk as string;
         if (isFirstChunk) {
           aiMessage.content = chunkText;
           isFirstChunk = false;
